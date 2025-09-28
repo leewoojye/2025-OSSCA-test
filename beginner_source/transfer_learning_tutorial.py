@@ -8,6 +8,8 @@ In this tutorial, you will learn how to train a convolutional neural network for
 image classification using transfer learning. You can read more about the transfer
 learning at `cs231n notes <https://cs231n.github.io/transfer-learning/>`__
 
+이 튜토리얼에서는 전이 학습(Transfer Learning)을 활용하여 이미지 분류를 위한 합성곱 신경망(convolutional neural network)을 어떻게 학습시키는지 배워보겠습니다. 전이 학습에 관한 더 많은 정보는 `cs231n notes <https://cs231n.github.io/transfer-learning/>`__ 에서 보실 수 있습니다.
+
 Quoting these notes,
 
     In practice, very few people train an entire Convolutional Network
@@ -17,6 +19,12 @@ Quoting these notes,
     contains 1.2 million images with 1000 categories), and then use the
     ConvNet either as an initialization or a fixed feature extractor for
     the task of interest.
+    
+위 노트를 인용해보면,
+    실제로, 충분한 크기의 데이터셋을 확보하는 경우는 상대적으로 드물기 때문에, 소수의 사람들만이
+    (무작위한 초기화로) 처음부터 합성곱 신경망을 훈련시킵니다. 대신에, 매우 큰 데이터셋으로 (예를 들어,
+    1000개의 범주에 대해 120만개의 이미지를 포함하는 ImageNet) ConvNet을 학습시킨 후, ConvNet을
+    관심 작업을 위한 초기화 혹은 고정된 특징 추출기로 사용하는 경우가 일반적입니다.
 
 These two major transfer learning scenarios look as follows:
 
@@ -28,6 +36,13 @@ These two major transfer learning scenarios look as follows:
    for all of the network except that of the final fully connected
    layer. This last fully connected layer is replaced with a new one
    with random weights and only this layer is trained.
+   
+두 가지 주요한 전이 학습 시나리오는 다음과 같습니다:
+- **ConvNet을 미세조정(Finetuning)**: 무작위로 초기화하는 대신, imagenet에 1000개의 데이터셋이
+  학습된 것처럼, 사전 학습된 네트워크로 신경망을 초기화합니다.
+- **고정된 특징 추출기로서 ConvNet**: 여기서는 마지막의 완전 연결 레이어(fully connected layer)를
+  제외한 모든 네트워크의 가중치를 고정시킵니다. 이 마지막 완전 연결 레이어는 무작위의 가중치를 갖는 새로운
+  레이어로 대체되고, 오직 이 레이어만이 학습합니다.
 
 """
 # License: BSD
